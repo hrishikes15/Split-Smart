@@ -54,8 +54,8 @@ const Expenses = () => {
   const queryParams = new URLSearchParams(location.search);
   const initialGroupId = queryParams.get("groupId");
 
-  const [expenses, setExpenses] = useState<any[]>([]);
-  const [groups, setGroups] = useState<any[]>([]);
+  const [expenses, setExpenses] = useState([]);
+  const [groups, setGroups] = useState([]);
   const [selectedGroupId, setSelectedGroupId] = useState(initialGroupId || "");
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -100,7 +100,7 @@ const Expenses = () => {
     fetchExpenses();
   }, [selectedGroupId]);
 
-  const handleAddExpense = async (e: React.FormEvent) => {
+  const handleAddExpense = async (e) => {
     e.preventDefault();
     if (!title || !amount) return;
 
@@ -142,7 +142,7 @@ const Expenses = () => {
     }
   };
 
-  const formatMoney = (valInPaise: number) => {
+  const formatMoney = (valInPaise) => {
     return (valInPaise / 100).toLocaleString("en-IN", {
       style: "currency",
       currency: "INR",
@@ -150,7 +150,7 @@ const Expenses = () => {
     });
   };
 
-  const formatDate = (dateStr: string | number | Date) => {
+  const formatDate = (dateStr) => {
     return new Date(dateStr).toLocaleDateString("en-IN", {
       day: "numeric",
       month: "short",
@@ -236,7 +236,7 @@ const Expenses = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {expenses.map((exp: any) => (
+                {expenses.map((exp) => (
                   <TableRow
                     key={exp._id}
                     className="border-border/10 hover:bg-white/5 transition-colors"

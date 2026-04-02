@@ -18,7 +18,7 @@ import PostLoginLanding from "./pages/PostLoginLanding";
 import { Button } from "./components/ui/button";
 import { GlobalBackground } from "./components/global-background";
 
-const PrivateRoute = ({ children }: { children: React.ReactElement }) => {
+const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   if (loading)
     return (
@@ -29,7 +29,7 @@ const PrivateRoute = ({ children }: { children: React.ReactElement }) => {
   return user ? children : <Navigate to="/login" />;
 };
 
-const PrivateLayout = ({ children }: { children: React.ReactNode }) => {
+const PrivateLayout = ({ children }) => {
   return (
     <div className="flex flex-col lg:flex-row min-h-screen px-3 py-3 md:px-5 md:py-5 gap-3 md:gap-5">
       {/* Desktop Nav - GLASSMORPHISM */}

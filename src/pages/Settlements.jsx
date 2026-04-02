@@ -25,10 +25,10 @@ import { Separator } from "@/components/ui/separator";
 
 const Settlements = () => {
   const { user } = useContext(AuthContext);
-  const [groups, setGroups] = useState<any[]>([]);
+  const [groups, setGroups] = useState([]);
   const [selectedGroupId, setSelectedGroupId] = useState("");
-  const [balances, setBalances] = useState<any>(null);
-  const [settlements, setSettlements] = useState<any[]>([]);
+  const [balances, setBalances] = useState(null);
+  const [settlements, setSettlements] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Settlements = () => {
     fetchData();
   }, [selectedGroupId]);
 
-  const formatMoney = (valInPaise: number) => {
+  const formatMoney = (valInPaise) => {
     return (valInPaise / 100).toLocaleString("en-IN", {
       style: "currency",
       currency: "INR",
@@ -211,7 +211,7 @@ const Settlements = () => {
                                 ? "YOU"
                                 : s.from.name
                                     .split(" ")
-                                    .map((n: string) => n[0])
+                                    .map((n) => n[0])
                                     .join("")}
                             </AvatarFallback>
                           </Avatar>
@@ -239,7 +239,7 @@ const Settlements = () => {
                                 ? "YOU"
                                 : s.to.name
                                     .split(" ")
-                                    .map((n: string) => n[0])
+                                    .map((n) => n[0])
                                     .join("")}
                             </AvatarFallback>
                           </Avatar>
