@@ -24,13 +24,13 @@ const Register = () => {
   const { register } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
       await register({ name, email, password });
       navigate("/");
-    } catch (err: any) {
+    } catch (err) {
       setError(
         err.response?.data?.message || "Registration failed. Please try again.",
       );

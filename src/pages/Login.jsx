@@ -23,13 +23,13 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
       await login({ email, password });
       navigate("/welcome");
-    } catch (err: any) {
+    } catch (err) {
       setError(
         err.response?.data?.message ||
           "Login failed. Please check your credentials.",

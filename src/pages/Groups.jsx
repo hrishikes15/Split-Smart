@@ -39,24 +39,24 @@ import { Separator } from "@/components/ui/separator";
 
 const Groups = () => {
   const { user } = useContext(AuthContext);
-  const [groups, setGroups] = useState<any[]>([]);
+  const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [newGroupName, setNewGroupName] = useState("");
 
   // Add member state
-  const [addMemberGroupId, setAddMemberGroupId] = useState<string | null>(null);
+  const [addMemberGroupId, setAddMemberGroupId] = useState(null);
   const [memberEmail, setMemberEmail] = useState("");
-  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [searching, setSearching] = useState(false);
   const [addMemberMsg, setAddMemberMsg] = useState({ type: "", text: "" });
-  const [addingMemberId, setAddingMemberId] = useState<string | null>(null);
+  const [addingMemberId, setAddingMemberId] = useState(null);
 
   // Expanded group for member list
-  const [expandedGroupId, setExpandedGroupId] = useState<string | null>(null);
+  const [expandedGroupId, setExpandedGroupId] = useState(null);
 
   // Delete group state
-  const [deletingGroupId, setDeletingGroupId] = useState<string | null>(null);
+  const [deletingGroupId, setDeletingGroupId] = useState(null);
 
   const fetchGroups = async () => {
     try {
@@ -73,7 +73,7 @@ const Groups = () => {
     fetchGroups();
   }, []);
 
-  const handleCreateGroup = async (e: React.FormEvent) => {
+  const handleCreateGroup = async (e) => {
     e.preventDefault();
     if (!newGroupName) return;
     try {
@@ -86,19 +86,19 @@ const Groups = () => {
     }
   };
 
-  const handleDeleteGroup = async (groupId: string) => {
+  const handleDeleteGroup = async (groupId) => {
     try {
       await api.delete(`/groups/${groupId}`);
       setGroups((prev) => prev.filter((g) => g._id !== groupId));
       setDeletingGroupId(null);
-    } catch (error: any) {
+    } catch (error) {
       console.error("Failed to delete group", error);
       alert(error.response?.data?.message || "Failed to delete group");
       setDeletingGroupId(null);
     }
   };
 
-  const handleSearchUsers = async (emailQuery: string) => {
+  const handleSearchUsers = async (emailQuery) => {
     setMemberEmail(emailQuery);
     setAddMemberMsg({ type: "", text: "" });
 
@@ -124,7 +124,7 @@ const Groups = () => {
     }
   };
 
-  const handleAddMember = async (targetUser: any) => {
+  const handleAddMember = async (targetUser) => {
     setAddingMemberId(targetUser._id);
     setAddMemberMsg({ type: "", text: "" });
     try {
@@ -140,7 +140,7 @@ const Groups = () => {
       });
       setSearchResults((prev) => prev.filter((u) => u._id !== targetUser._id));
       setMemberEmail("");
-    } catch (err: any) {
+    } catch (err) {
       const msg = err.response?.data?.message || "Failed to add member";
       setAddMemberMsg({ type: "error", text: msg });
     } finally {
@@ -204,7 +204,7 @@ const Groups = () => {
             </CardContent>
           </Card>
         ) : (
-          groups.map((group: any) => (
+          groups.map((group) => (
             <Card
               key={group._id}
               className="overflow-hidden transition-all hover:shadow-xl hover:shadow-primary/5 border-border/20 bg-card backdrop-blur-none flex flex-col group/card-item"

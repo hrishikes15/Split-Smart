@@ -6,7 +6,7 @@ import { AuthContext } from '../context/AuthContext';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 
-const StatCard = ({ title, amount, icon, color, description }: any) => (
+const StatCard = ({ title, amount, icon, color, description }) => (
   <Card className="overflow-hidden transition-all hover:shadow-xl hover:shadow-primary/5 border-border/20 bg-card/40 backdrop-blur-3xl group">
     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
       <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
@@ -40,13 +40,13 @@ const Dashboard = () => {
         let totalOwe = 0;
         let totalRec = 0;
 
-        await Promise.all(groups.map(async (g: any) => {
+        await Promise.all(groups.map(async (g) => {
            const [expRes, balRes] = await Promise.all([
              api.get(`/groups/${g._id}/expenses`),
              api.get(`/groups/${g._id}/balances`)
            ]);
            
-           expRes.data.forEach((e: any) => totalExp += e.amount);
+           expRes.data.forEach((e) => totalExp += e.amount);
            
            const myBalance = balRes.data[user._id] || 0;
            if (myBalance < 0) totalOwe += Math.abs(myBalance);
@@ -67,7 +67,7 @@ const Dashboard = () => {
     fetchDashboardData();
   }, [user]);
 
-  const format = (cents: number) => '₹' + (cents / 100).toFixed(2);
+  const format = (cents) => '₹' + (cents / 100).toFixed(2);
 
   return (
     <div className="space-y-8 max-w-6xl mx-auto py-8">

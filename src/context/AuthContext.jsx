@@ -1,10 +1,10 @@
-import { createContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import api from '../api/axios';
 
-export const AuthContext = createContext<any>(null);
+export const AuthContext = createContext(null);
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<any>(null);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,14 +20,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoading(false);
   }, []);
 
-  const login = async (credentials: any) => {
+  const login = async (credentials) => {
     const { data } = await api.post('/auth/login', credentials);
     setUser(data);
     localStorage.setItem('splitSmartUser', JSON.stringify(data));
     return data;
   };
 
-  const register = async (userData: any) => {
+  const register = async (userData) => {
     const { data } = await api.post('/auth/register', userData);
     setUser(data);
     localStorage.setItem('splitSmartUser', JSON.stringify(data));
