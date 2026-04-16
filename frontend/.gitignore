@@ -26,8 +26,3 @@ dist-ssr
 # Backend secrets
 backend/.env
 backend/.env.*
-
-# Monorepo root ignores
-backend/.env
-backend/.env.*
-node_modules
